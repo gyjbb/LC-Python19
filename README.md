@@ -6,14 +6,14 @@ June 09, 2023  4h
 
 Congratulations!\
 This is the nineteenth day for leetcode python study. Today we will learn more about the Binary Tree!\
-The challenges today are about **binary search tree搜索树** ~~need to delete later~~.
+The challenges today are about **binary search tree搜索树**. How to get the Lowest Common Ancestor of two elements in a binary search tree. What's the difference with a general binary tree? How to add and delete elements in a binary search tree? ~~need to delete later~~.
 
 
 ## 235. Lowest Common Ancestor of a Binary Search Tree
 [Reading link](https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0235.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88.md)\
 [video](https://www.bilibili.com/video/BV1Zt4y1F7ww/?spm_id_from=pageDriver&vd_source=63f26efad0d35bcbb0de794512ac21f3)\
 [leetcode](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)\
-二叉搜索树的最近公共祖先, 相对于普通二叉树的最近公共祖先,本题就简单一些了，因为可以利用二叉搜索树的特性。 
+Compared to the lowest common ancestor of general binary tree, binary search tree is more simple since we can take advantage of the characteristic of binary search tree. When traverse inorder, the array we can get is monotonically increasing.
 ```python
 # ways 1: recursion
 # Definition for a binary tree node.
@@ -51,7 +51,7 @@ class Solution:
             return root
 ```
 ```python
-# ways 2: 迭代
+# ways 2: iteration迭代
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
         while root:

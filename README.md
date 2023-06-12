@@ -114,10 +114,42 @@ class Solution:
 
 ## 450. Delete Node in a BST
 [leetcode](https://leetcode.com/problems/delete-node-in-a-bst/)\
+[worth watching again](https://www.bilibili.com/video/BV1tP41177us/?spm_id_from=pageDriver&vd_source=63f26efad0d35bcbb0de794512ac21f3)\
 Compared to inserting into a binary search tree, deleting from a binary search tree is more complicated, because the tree's structure will be changed.\
-This question can be diveded into 5 categories. The deleted tree node can't be found in the tree, or the deleted tree node is a leaf node, or a node with only left subtree but no right subtree, or node with only right subtree but no left subtree, or with both left and right subtree. The final situation is the most complicated one. We need to delete the node, and move its whole left subtree under the most left 
+This question can be divided into 5 categories. The deleted tree node can't be found in the tree, or the deleted tree node is a leaf node, or a node with only left subtree but no right subtree, or node with only right subtree but no left subtree, or with both left and right subtree. The final situation is the most complicated one. We need to delete the node, and move its whole left subtree under the most left 
 node of its whole right subtree.\
 The termination condition is when we find the node we want to delete, and delete it. 
+```python
+# ways 1: recursion
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+        if root is None:
+            return root
+        if root.val == key:
+            if root.left is None and root.right is None:
+                return None
+            elif root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            else:
+                cur = root.right
+                while cur.left is not None:
+                    cur = cur.left      #get the most left node of the right subtree
+                cur.left = root.left   #put the left subtree of the deleted node as the left subtree of the most left node of the deleted node's right subtree.
+                return root.right
+        if root.val > key:
+            root.left = self.deleteNode(root.left, key)
+        if root.val < key:
+            root.right = self.deleteNode(root.right, key)
+        return root
+```
 
 
 

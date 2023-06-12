@@ -1,6 +1,6 @@
 # LC-Python19
 
-## 235. Lowest Common Ancestor of a Binary Search Tree
+## 235. Lowest Common Ancestor of a Binary Search Tree, 701. Insert into a Binary Search Tree
 
 June 09, 2023  4h
 
@@ -65,9 +65,10 @@ class Solution:
 ```
 
 
-## 701.
-二叉搜索树中的插入操作, simple
-
+## 701. Insert into a Binary Search Tree
+[leetcode](https://leetcode.com/problems/insert-into-a-binary-search-tree/)\
+This is a simple question. Any new node can be added as a leaf node, and the tree's original structure remains unchanged.\
+The root in termination condition means the node that we currently traverse. In this question the termination condition is: root is null, whch means we traverse and find the blank place where we can add the new element. 
 
 
 

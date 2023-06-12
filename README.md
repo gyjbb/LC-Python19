@@ -1,6 +1,6 @@
 # LC-Python19
 
-## 235. Lowest Common Ancestor of a Binary Search Tree, 701. Insert into a Binary Search Tree
+## 235. Lowest Common Ancestor of a Binary Search Tree, 701. Insert into a Binary Search Tree, 450. Delete Node in a BST
 
 June 09, 2023  4h
 
@@ -68,9 +68,60 @@ class Solution:
 ## 701. Insert into a Binary Search Tree
 [leetcode](https://leetcode.com/problems/insert-into-a-binary-search-tree/)\
 This is a simple question. Any new node can be added as a leaf node, and the tree's original structure remains unchanged.\
-The root in termination condition means the node that we currently traverse. In this question the termination condition is: root is null, whch means we traverse and find the blank place where we can add the new element. 
+The root in termination condition means the node that we currently traverse. In this question the termination condition is: root is null, which means we traverse and find the blank place where we can add the new element. Then at the new place, we define a new tree node, and add the new value. And finally return the new node to the upper node, as a left/right branch of the upper level node. So the new node is connected with its father node and added to the binary tree!\
+In conclusion, the returned element(a new tree node) in the termination condition is given to the root.left / root.right in the left/right branches part.
+```python
+# ways 1: recurson
+class Solution:
+    def insertIntoBST(self, root, val):
+        if root is None:
+            node = TreeNode(val)
+            return node             #**returned value**
+
+        if root.val > val:
+            root.left = self.insertIntoBST(root.left, val)    #**the left subtree of current level equals the returned value of next recursion**
+        if root.val < val:
+            root.right = self.insertIntoBST(root.right, val)
+
+        return root
+```
+```python
+# ways 1: iteration
+class Solution:
+    def insertIntoBST(self, root, val):
+        if root is None:  # if the root is null, create a new node as root and return it.
+            node = TreeNode(val)
+            return node
+
+        cur = root
+        parent = root  # record the last node, used to connect the new node
+        while cur is not None:
+            parent = cur
+            if cur.val > val:
+                cur = cur.left
+            else:
+                cur = cur.right
+
+        node = TreeNode(val)
+        if val < parent.val:
+            parent.left = node  # connect the new node to the left subtree of parent node将新节点连接到父节点的左子树
+        else:
+            parent.right = node  # connect the new node to the right subtree of parent node将新节点连接到父节点的右子树
+
+        return root
+```
+
+
+## 450. Delete Node in a BST
+[leetcode](https://leetcode.com/problems/delete-node-in-a-bst/)\
+Compared to inserting into a binary search tree, deleting from a binary search tree is more complicated, because the tree's structure will be changed.\
+This question can be diveded into 5 categories. The deleted tree node can't be found in the tree, or the deleted tree node is a leaf node, or a node with only left subtree but no right subtree, or node with only right subtree but no left subtree, or with both left and right subtree. The final situation is the most complicated one. We need to delete the node, and move its whole left subtree under the most left 
+node of its whole right subtree.\
+The termination condition is when we find the node we want to delete, and delete it. 
 
 
 
-## 450.
-删除二叉搜索树中的节点，相对于插入操作，本题就有难度了，涉及到改树的结构。
+
+
+
+
